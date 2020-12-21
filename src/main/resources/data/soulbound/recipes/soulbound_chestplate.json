@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "x x",
+    "xhx",
+    "xfx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "soulbound:soul_ingot"
+    },
+    "h": {
+      "item": "soulbound:haste_soul"
+    },
+    "f": {
+      "item": "soulbound:fly_soul"
+    }
+  },
+  "result":
+  {
+    "item": "soulbound:soulbound_chestplate",
+    "count": 1
+  }
+}

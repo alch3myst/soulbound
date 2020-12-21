@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xfx",
+    "xnx",
+    "xfx"
+  ],
+  "key":
+  {
+    "x": {
+      "item": "soulbound:soul_dust"
+    },
+    "f": {
+      "item": "minecraft:feather"
+    },
+    "n": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result":
+  {
+    "item": "soulbound:fly_soul",
+    "count": 1
+  }
+}

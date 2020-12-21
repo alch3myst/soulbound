@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xgx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x": {
+      "item": "soulbound:soul_dust"
+    },
+    "g": {
+      "item": "minecraft:golden_apple"
+    }
+  },
+  "result":
+  {
+    "item": "soulbound:healing_soul",
+    "count": 1
+  }
+}

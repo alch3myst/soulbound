@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xex",
+    "xxx"
+  ],
+  "key":
+  {
+    "x": {
+      "item": "soulbound:soul_dust"
+    },
+    "e": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result":
+  {
+    "item": "soulbound:night_eye_soul",
+    "count": 1
+  }
+}

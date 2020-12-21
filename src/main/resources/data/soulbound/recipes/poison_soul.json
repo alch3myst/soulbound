@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xrx",
+    "xxx",
+    "xbx"
+  ],
+  "key":
+  {
+    "x": {
+      "item": "soulbound:soul_dust"
+    },
+    "r": {
+      "item": "minecraft:red_mushroom"
+    },
+    "b": {
+      "item": "minecraft:brown_mushroom"
+    }
+  },
+  "result":
+  {
+    "item": "soulbound:poison_soul",
+    "count": 1
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xhx",
+    "   "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "soulbound:soul_ingot"
+    },
+    "h": {
+      "item": "soulbound:healing_soul"
+    }
+  },
+  "result":
+  {
+    "item": "soulbound:soulbound_helmet",
+    "count": 1
+  }
+}

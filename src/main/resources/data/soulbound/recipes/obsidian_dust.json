@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "soulbound:pastle"
+    },
+    {
+      "item": "soulbound:iron_bowl"
+    },
+    {
+      "item": "minecraft:obsidian"
+    }
+  ],
+  "result":
+  {
+    "item": "soulbound:obsidian_dust",
+    "count": 4
+  }
+}

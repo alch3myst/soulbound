@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "soulbound:hunt_trace"
+    },{
+      "item": "soulbound:obsidian_dust"
+    },{
+      "item": "minecraft:ghast_tear"
+    }
+  ],
+  "result":
+  {
+    "item": "soulbound:predator_dust",
+    "count": 2
+  }
+}

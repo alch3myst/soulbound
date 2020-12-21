@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xsx",
+    " n "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "soulbound:predator_ingot"
+    },
+    "s": {
+      "item": "soulbound:sea_soul"
+    },
+    "n": {
+      "item": "soulbound:night_eye_soul"
+    }
+  },
+  "result":
+  {
+    "item": "soulbound:predator_helmet",
+    "count": 1
+  }
+}

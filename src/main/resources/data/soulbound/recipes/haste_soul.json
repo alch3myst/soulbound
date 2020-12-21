@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xsx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x": {
+      "item": "soulbound:soul_dust"
+    },
+    "s": {
+      "item": "soulbound:zombie_pigman_finger"
+    }
+  },
+  "result":
+  {
+    "item": "soulbound:haste_soul",
+    "count": 1
+  }
+}

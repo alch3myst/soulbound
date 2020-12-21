@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xsx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x": {
+      "item": "soulbound:soul_dust"
+    },
+    "s": {
+      "item": "soulbound:skeleton_leg"
+    }
+  },
+  "result":
+  {
+    "item": "soulbound:speed_soul",
+    "count": 1
+  }
+}

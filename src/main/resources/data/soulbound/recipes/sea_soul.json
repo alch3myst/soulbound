@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xix",
+    "xpx",
+    "xix"
+  ],
+  "key":
+  {
+    "x": {
+      "item": "soulbound:soul_dust"
+    },
+    "i": {
+      "item": "minecraft:ink_sac"
+    },
+    "p": {
+      "item": "minecraft:pufferfish"
+    }
+  },
+  "result":
+  {
+    "item": "soulbound:sea_soul",
+    "count": 1
+  }
+}

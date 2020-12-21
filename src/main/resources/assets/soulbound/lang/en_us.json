@@ -1,0 +1,37 @@
+{
+  "item.soulbound.diamond_dust": "Diamond Dust",
+  "item.soulbound.obsidian_dust": "Obsidian Dust",
+  "item.soulbound.soul_dust": "Soul Dust",
+  "item.soulbound.predator_dust": "Predator Dust",
+  "item.soulbound.soul_ingot": "Soul Ingot",
+  "item.soulbound.predator_ingot": "Predator Ingot",
+  "item.soulbound.skeleton_leg": "Skeleton Leg",
+  "item.soulbound.zombie_pigman_finger": "Pigman Finger",
+  "item.soulbound.fox_leg": "Fox Leg",
+  "item.soulbound.hunt_trace": "Hunt Trace",
+  "item.soulbound.healing_soul": "Healing Soul",
+  "item.soulbound.haste_soul": "Haste Soul",
+  "item.soulbound.fly_soul": "Fly Soul",
+  "item.soulbound.speed_soul": "Speed Soul",
+  "item.soulbound.jumping_soul": "Jumping Soul",
+  "item.soulbound.sea_soul": "Sea Soul",
+  "item.soulbound.night_eye_soul": "Night Eye Soul",
+  "item.soulbound.predator_soul": "Predator Soul",
+  "item.soulbound.poison_soul": "Poison Soul",
+  "item.soulbound.iron_bowl": "Iron Bowl",
+  "item.soulbound.pastle": "Pastle",
+
+  "item.soulbound.soul_bound_sword": "Soul Bound Sword",
+  "item.soulbound.soulbound_chestplate": "Soul Bound Chestplate",
+  "item.soulbound.soulbound_helmet": "Soul Bound Helmet",
+  "item.soulbound.soulbound_legs": "Soul Bound Legs",
+  "item.soulbound.soulbound_boots": "Soul Bound Boots",
+
+  "item.soulbound.predator_chestplate": "Predator Chestplate",
+  "item.soulbound.predator_helmet": "Predator Helmet",
+  "item.soulbound.predator_legs": "Predator Legs",
+  "item.soulbound.predator_boots": "Predator Boots",
+
+  "effect.soulbound.predators_mark": "Predator's Mark",
+  "itemGroup.soulBoundTab": "Soul Bound"
+}
