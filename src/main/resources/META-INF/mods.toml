@@ -34,7 +34,7 @@ logoFile="icon.jpg" #optional
 authors="Alch3myst" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Tnks 4 using this whell ballanced mod
+Just another armor set
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.examplemod]] #optional

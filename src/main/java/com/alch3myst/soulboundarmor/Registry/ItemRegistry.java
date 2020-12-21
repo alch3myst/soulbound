@@ -1,6 +1,7 @@
 package com.alch3myst.soulboundarmor.Registry;
 
 import com.alch3myst.soulboundarmor.Armor.*;
+import com.alch3myst.soulboundarmor.Item.BaseItemDescription;
 import com.alch3myst.soulboundarmor.SoulBound;
 import com.alch3myst.soulboundarmor.Tools.IronBowl;
 import com.alch3myst.soulboundarmor.Tools.ItemTiers;
@@ -41,13 +42,24 @@ public class ItemRegistry {
 
     // Predator Ingot
     public static final RegistryObject<Item> PREDATOR_INGOT = ITEMS.register("predator_ingot", () -> new Item(new Item.Properties().group(SoulBound.TAB)) );
-    public static final RegistryObject<Item> BABY_SKELETON_LEG = ITEMS.register("skeleton_leg", () -> new Item(new Item.Properties().group(SoulBound.TAB)));
+
+    public static final RegistryObject<Item> BABY_SKELETON_LEG = ITEMS.register("skeleton_leg", () -> new BaseItemDescription(
+            new Item.Properties().group(SoulBound.TAB),
+            "Rare drop form Skeletons"));
 
     // Pigman Finger
-    public static final RegistryObject<Item> ZOMBIE_PIGMAN_FINGER = ITEMS.register("zombie_pigman_finger", () -> new Item(new Item.Properties().group(SoulBound.TAB)) );
+    public static final RegistryObject<Item> ZOMBIE_PIGMAN_FINGER = ITEMS.register("zombie_pigman_finger", () -> new BaseItemDescription(
+            new Item.Properties().group(SoulBound.TAB),
+            "Rare drop from Zombified Piglin") );
 
-    public static final RegistryObject<Item> FOX_LEG = ITEMS.register("fox_leg", () -> new Item(new Item.Properties().group(SoulBound.TAB)) );
-    public static final RegistryObject<Item> HUNT_TRACE = ITEMS.register("hunt_trace", () -> new Item(new Item.Properties().group(SoulBound.TAB)) );
+    public static final RegistryObject<Item> FOX_LEG = ITEMS.register("fox_leg", () -> new BaseItemDescription(
+            new Item.Properties().group(SoulBound.TAB),
+            "U only need to kill one fox ;l") );
+
+
+    public static final RegistryObject<Item> HUNT_TRACE = ITEMS.register("hunt_trace", () -> new BaseItemDescription(
+            new Item.Properties().group(SoulBound.TAB),
+            "Rare drop from Zombies") );
 
     // Iron Bow
     public static final RegistryObject<Item> IRON_BOWL = ITEMS.register("iron_bowl", () -> new IronBowl(new Item.Properties().group(SoulBound.TAB).defaultMaxDamage(1000)) );
