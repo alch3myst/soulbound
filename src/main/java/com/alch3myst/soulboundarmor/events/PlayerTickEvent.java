@@ -2,32 +2,33 @@ package com.alch3myst.soulboundarmor.events;
 
 import com.alch3myst.soulboundarmor.Registry.EffectRegistry;
 import com.alch3myst.soulboundarmor.Registry.ItemRegistry;
-import com.alch3myst.soulboundarmor.SoulBound;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.monster.ZombifiedPiglinEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-@Mod.EventBusSubscriber(modid = SoulBound.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PlayerTickEvent {
 
     @SubscribeEvent
-    public static void onLivingUpdateEvent(LivingEvent.LivingJumpEvent event)
+    public void onLivingUpdateEvent(LivingJumpEvent event)
     {
         // Full soul bound armor set
         if (event.getEntityLiving() != null) {
@@ -38,10 +39,10 @@ public class PlayerTickEvent {
                 PlayerEntity player = ((PlayerEntity) event.getEntityLiving());
 
                 if ( // If wearing Full soul bound set
-                    player.inventory.armorItemInSlot(0).getItem() == ItemRegistry.SOUL_BOUND_BOOTS.get() &&
-                    player.inventory.armorItemInSlot(1).getItem() == ItemRegistry.SOUL_BOUND_LEGS.get() &&
-                    player.inventory.armorItemInSlot(2).getItem() == ItemRegistry.SOUL_BOUND_CHESTPLATE.get() &&
-                    player.inventory.armorItemInSlot(3).getItem() == ItemRegistry.SOUL_BOUND_HELMET.get()
+                    player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.SOUL_BOUND_BOOTS.get() &&
+                    player.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() == ItemRegistry.SOUL_BOUND_LEGS.get() &&
+                    player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ItemRegistry.SOUL_BOUND_CHESTPLATE.get() &&
+                    player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ItemRegistry.SOUL_BOUND_HELMET.get()
                 ) {
                     if ( !w.isRemote ) {
                         // Get all players in a 10 blocks radius
@@ -79,26 +80,26 @@ public class PlayerTickEvent {
     }
 
     @SubscribeEvent
-    public static void fallDamage(LivingFallEvent event) {
+    public void fallDamage(LivingFallEvent event) {
         // Get current played world
         World w = event.getEntityLiving().world;
 
         // Bug fix if
         if (event.getEntityLiving() != null && event.getEntityLiving() instanceof PlayerEntity) {
             if (!w.isRemote) {
-                PlayerEntity player = ((PlayerEntity) event.getEntityLiving());
+                PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 
                 // Cancel fall damage event for foes
                 event.setCanceled(
-                        player.inventory.armorItemInSlot(0).getItem() == ItemRegistry.PREDATOR_BOOTS.get() ||
-                        player.inventory.armorItemInSlot(0).getItem() == ItemRegistry.SOUL_BOUND_BOOTS.get()
+                        player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.PREDATOR_BOOTS.get() ||
+                        player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.SOUL_BOUND_BOOTS.get()
                 );
             }
         }
     }
 
     @SubscribeEvent
-    public static void onDamageAnything(AttackEntityEvent event)
+    public void onDamageAnything(AttackEntityEvent event)
     {
         // Get current player world
         World w = ((PlayerEntity)event.getEntityLiving()).world;
@@ -108,10 +109,10 @@ public class PlayerTickEvent {
             PlayerEntity player = ((PlayerEntity) event.getEntityLiving());
             // Predator 4 armor piece bonus
             if ( // If wearing Full predator set
-                    player.inventory.armorItemInSlot(0).getItem() == ItemRegistry.PREDATOR_BOOTS.get() &&
-                            player.inventory.armorItemInSlot(1).getItem() == ItemRegistry.PREDATOR_LEGS.get() &&
-                            player.inventory.armorItemInSlot(2).getItem() == ItemRegistry.PREDATOR_CHESTPLATE.get() &&
-                            player.inventory.armorItemInSlot(3).getItem() == ItemRegistry.PREDATOR_HELMET.get()
+                    player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.PREDATOR_BOOTS.get() &&
+                    player.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() == ItemRegistry.PREDATOR_LEGS.get() &&
+                    player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ItemRegistry.PREDATOR_CHESTPLATE.get() &&
+                    player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ItemRegistry.PREDATOR_HELMET.get()
             ) {
                 // If foe is alive
                 if (event.getTarget().isAlive()) {
@@ -135,47 +136,86 @@ public class PlayerTickEvent {
     }
 
     @SubscribeEvent
-    public static void itemDrops(LivingDeathEvent event) {
-        World world = event.getEntityLiving().world;
+    public void itemDrops(LivingDropsEvent event) {
 
-        if (!world.isRemote) {
+        LivingEntity entityLiving = event.getEntityLiving();
+        World world = entityLiving.getEntityWorld();
+        Collection<ItemEntity> drops = event.getDrops();
 
-            // Skeleton drop
-            if (event.getEntityLiving() instanceof SkeletonEntity && event.getEntityLiving().isAlive() ) {
+        // Skeleton drop
+        if (entityLiving instanceof SkeletonEntity) {
 
-                // Random chance calculator - 3% chance to drop
-                if (new Random().nextFloat() <= 0.03F ) {
-                    event.getEntityLiving().entityDropItem(ItemRegistry.BABY_SKELETON_LEG.get(), new Random().nextInt(4));
-                }
-            }
-
-            // Zombie drop
-            if (event.getEntityLiving() instanceof ZombieEntity && event.getEntityLiving().isAlive() ) {
-
-                // Random chance calculator - 5% chance to drop
-                if (new Random().nextFloat() <= 0.05F ) {
-                    event.getEntityLiving().entityDropItem(ItemRegistry.HUNT_TRACE.get(), new Random().nextInt(4));
-                }
-            }
-
-            // Pigman drop
-            if (event.getEntityLiving() instanceof ZombifiedPiglinEntity && event.getEntityLiving().isAlive() ) {
-
-                // Random chance calculator - 10% chance of drop
-                if (new Random().nextFloat() <= 0.1F ) {
-                    event.getEntityLiving().entityDropItem(ItemRegistry.ZOMBIE_PIGMAN_FINGER.get(), new Random().nextInt(5));
-                }
-            }
-
-            // Fox drop
-            if (event.getEntityLiving() instanceof FoxEntity && event.getEntityLiving().isAlive() ) {
-
-                // Drop 4 legs #don't kill foxes
-                event.getEntityLiving().entityDropItem(ItemRegistry.FOX_LEG.get(), 1);
-                event.getEntityLiving().entityDropItem(ItemRegistry.FOX_LEG.get(), 1);
-                event.getEntityLiving().entityDropItem(ItemRegistry.FOX_LEG.get(), 1);
-                event.getEntityLiving().entityDropItem(ItemRegistry.FOX_LEG.get(), 1);
+            // Random chance calculator - 3% chance to drop
+            if (new Random().nextFloat() <= 0.03F) {
+                // Add drop
+                drops.add(new ItemEntity(
+                        world, // World
+                        entityLiving.getPosX(), // Mob position
+                        entityLiving.getPosY(),
+                        entityLiving.getPosZ(),
+                        new ItemStack(
+                                ItemRegistry.BABY_SKELETON_LEG.get(), // Item to drop
+                                new Random().nextInt(4)) // Quantity to drop
+                        )
+                );
             }
         }
+
+        // Zombie drop
+        if (entityLiving instanceof ZombieEntity) {
+
+            // Random chance calculator - 5% chance to drop
+            if (new Random().nextFloat() <= 0.05F) {
+
+                // Add drop
+                drops.add(new ItemEntity(
+                                world, // World
+                                entityLiving.getPosX(), // Mob position
+                                entityLiving.getPosY(),
+                                entityLiving.getPosZ(),
+                                new ItemStack(
+                                        ItemRegistry.HUNT_TRACE.get(), // Item to drop
+                                        new Random().nextInt(4)) // Quantity to drop
+                        )
+                );
+            }
+        }
+
+        // Pigman drop
+        if (entityLiving instanceof ZombifiedPiglinEntity) {
+
+            // Random chance calculator - 10% chance of drop
+            if (new Random().nextFloat() <= 0.1F) {
+                // Add drop
+                drops.add(new ItemEntity(
+                                world, // World
+                                entityLiving.getPosX(), // Mob position
+                                entityLiving.getPosY(),
+                                entityLiving.getPosZ(),
+                                new ItemStack(
+                                        ItemRegistry.ZOMBIE_PIGMAN_FINGER.get(), // Item to drop
+                                        new Random().nextInt(5)) // Quantity to drop
+                        )
+                );
+            }
+        }
+
+        // Fox drop
+        if (entityLiving instanceof FoxEntity) {
+
+            // Drop 4 legs #don't kill foxes
+            // Add drop
+            drops.add(new ItemEntity(
+                            world, // World
+                            entityLiving.getPosX(), // Mob position
+                            entityLiving.getPosY(),
+                            entityLiving.getPosZ(),
+                            new ItemStack(
+                                    ItemRegistry.FOX_LEG.get(), // Item to drop
+                                    4 ) // Quantity to drop
+                    )
+            );
+        }
+
     }
 }

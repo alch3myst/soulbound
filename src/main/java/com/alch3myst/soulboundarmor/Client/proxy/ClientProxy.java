@@ -13,7 +13,7 @@ public class ClientProxy implements IProxy {
         modEventBuss.addListener(this::clientSetup);
     }
 
-    private void clientSetup(final FMLClientSetupEvent event) {}
+    private void clientSetup(final FMLClientSetupEvent event) { }
 
     // Soulbound Custom Armor model sizes
     private final SoulBoundSetModel soulArmor = new SoulBoundSetModel(0.3F);

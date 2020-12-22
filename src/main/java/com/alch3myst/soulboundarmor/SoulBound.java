@@ -5,6 +5,7 @@ import com.alch3myst.soulboundarmor.Proxy.IProxy;
 import com.alch3myst.soulboundarmor.Registry.EffectRegistry;
 import com.alch3myst.soulboundarmor.Registry.ItemRegistry;
 import com.alch3myst.soulboundarmor.Server.proxy.ServerProxy;
+import com.alch3myst.soulboundarmor.events.PlayerTickEvent;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,7 +19,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-//@Mod.EventBusSubscriber(modid = SoulBound.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 @Mod("soulbound")
 public class SoulBound
 {
@@ -29,14 +29,14 @@ public class SoulBound
     public static final IProxy PROXY = DistExecutor.safeRunForDist( () -> ClientProxy::new, () -> ServerProxy::new);
 
     public SoulBound() {
-        // Register the doClientStuff method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus(),
                 forgeEventBus = MinecraftForge.EVENT_BUS;
 
         PROXY.setup(modEventBus, forgeEventBus);
-        modEventBus.addListener(this::setup);
+
+        modEventBus.addListener(this::commonSetup);
+        forgeEventBus.addListener(this::doClientStuff);
 
         // Register Items
         ItemRegistry.init();
@@ -45,17 +45,15 @@ public class SoulBound
         EffectRegistry.init();
 
         // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+//        MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void setup(final FMLCommonSetupEvent event)
-    {
-
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        LOGGER.warn("PLZ WORK U SON OF A !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        MinecraftForge.EVENT_BUS.register(new PlayerTickEvent());
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
-
-    }
+    private void doClientStuff(final FMLClientSetupEvent event) { }
 
     // Creative tab registry
     public static final ItemGroup TAB = new ItemGroup("soulBoundTab") {
