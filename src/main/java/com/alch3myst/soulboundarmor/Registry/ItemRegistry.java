@@ -1,11 +1,11 @@
 package com.alch3myst.soulboundarmor.Registry;
 
-import com.alch3myst.soulboundarmor.Armor.*;
+import com.alch3myst.soulboundarmor.Item.Armor.*;
 import com.alch3myst.soulboundarmor.Item.BaseItemDescription;
 import com.alch3myst.soulboundarmor.SoulBound;
-import com.alch3myst.soulboundarmor.Tools.IronBowl;
-import com.alch3myst.soulboundarmor.Tools.ItemTiers;
-import com.alch3myst.soulboundarmor.Tools.PastleItem;
+import com.alch3myst.soulboundarmor.Item.Tools.IronBowl;
+import com.alch3myst.soulboundarmor.Item.Tools.ItemTiers;
+import com.alch3myst.soulboundarmor.Item.Tools.PastleItem;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;

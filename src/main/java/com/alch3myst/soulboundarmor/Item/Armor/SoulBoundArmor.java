@@ -1,4 +1,4 @@
-package com.alch3myst.soulboundarmor.Armor;
+package com.alch3myst.soulboundarmor.Item.Armor;
 
 import com.alch3myst.soulboundarmor.Client.proxy.ClientProxy;
 import com.alch3myst.soulboundarmor.SoulBound;
@@ -21,28 +21,26 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SoulBoundHelmet extends ArmorItem {
+public class SoulBoundArmor extends ArmorItem {
 
-    public SoulBoundHelmet(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
+    public SoulBoundArmor(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
         super(materialIn, slot, builderIn );
     }
 
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        if (!player.isPotionActive(Effects.REGENERATION)) {
-            if (!world.isRemote) {
-                player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 1000, 2));
-                player.addPotionEffect(new EffectInstance(Effects.LUCK, 1000, 1));
-            }
+        if (!player.isPotionActive(Effects.JUMP_BOOST)) {
+            player.addPotionEffect(new EffectInstance(Effects.HASTE, 1000, 1));
         }
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(ITextComponent.getTextComponentOrEmpty("Regeneration"));
+        tooltip.add(ITextComponent.getTextComponentOrEmpty("Your soul jump exiling life"));
+        tooltip.add(ITextComponent.getTextComponentOrEmpty("and can make you fly"));
     }
 
-    // Custom armor
     @Nullable
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {

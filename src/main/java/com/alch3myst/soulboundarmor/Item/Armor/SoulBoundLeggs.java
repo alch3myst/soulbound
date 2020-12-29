@@ -1,4 +1,4 @@
-package com.alch3myst.soulboundarmor.Armor;
+package com.alch3myst.soulboundarmor.Item.Armor;
 
 import com.alch3myst.soulboundarmor.Client.proxy.ClientProxy;
 import com.alch3myst.soulboundarmor.SoulBound;
@@ -19,17 +19,18 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class PredatorLeggs extends ArmorItem {
+public class SoulBoundLeggs extends ArmorItem {
 
-    public PredatorLeggs(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
+    public SoulBoundLeggs(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
         super(materialIn, slot, builderIn );
     }
 
+    // Add speed effect on equip armor piece
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-
+        // Check if some speed effect are going
         if (!player.isPotionActive(Effects.SPEED)) {
-            player.addPotionEffect(new EffectInstance(Effects.SPEED, 1000, 3));
+            player.addPotionEffect(new EffectInstance(Effects.SPEED, 1000, 1));
         }
     }
 
@@ -38,16 +39,17 @@ public class PredatorLeggs extends ArmorItem {
         tooltip.add(ITextComponent.getTextComponentOrEmpty("Speed"));
     }
 
-    // Custom model render
+    // Custom model
     @Nullable
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
-        return SoulBound.PROXY instanceof ClientProxy ? ((ClientProxy) SoulBound.PROXY).getPredatorSetM(armorSlot) : null;
+        return SoulBound.PROXY instanceof ClientProxy ? ((ClientProxy) SoulBound.PROXY).getSoulBoundSet(armorSlot) : null;
     }
 
+    // Set texture
     @Nullable
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
-        return "soulbound:textures/models/armor/predator_layer_1.png";
+        return "soulbound:textures/models/armor/soul_layer_1.png";
     }
 }

@@ -1,4 +1,4 @@
-package com.alch3myst.soulboundarmor.Armor;
+package com.alch3myst.soulboundarmor.Item.Armor;
 
 import com.alch3myst.soulboundarmor.Client.proxy.ClientProxy;
 import com.alch3myst.soulboundarmor.SoulBound;
@@ -15,40 +15,41 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SoulBoundBoots extends ArmorItem {
+public class PredatorHelmet extends ArmorItem {
 
-    public SoulBoundBoots(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
+    public PredatorHelmet(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
         super(materialIn, slot, builderIn );
     }
 
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        if (!player.isPotionActive(Effects.JUMP_BOOST)) {
-            player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 1000, 1));
+
+        if (!player.isPotionActive(Effects.NIGHT_VISION)) {
+            player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 1000, 0));
+            player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 1000, 0));
         }
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(ITextComponent.getTextComponentOrEmpty("Jump Boost"));
-        tooltip.add(ITextComponent.getTextComponentOrEmpty("No Fall damage"));
+        tooltip.add(ITextComponent.getTextComponentOrEmpty("Night Vision"));
+        tooltip.add(ITextComponent.getTextComponentOrEmpty("Water Breathing"));
     }
 
+    // Custom model render
     @Nullable
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
-        return SoulBound.PROXY instanceof ClientProxy ? ((ClientProxy) SoulBound.PROXY).getSoulBoundSet(armorSlot) : null;
+        return SoulBound.PROXY instanceof ClientProxy ? ((ClientProxy) SoulBound.PROXY).getPredatorSetM(armorSlot) : null;
     }
 
     @Nullable
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
-        return "soulbound:textures/models/armor/soul_layer_1.png";
+        return "soulbound:textures/models/armor/predator_layer_1.png";
     }
 }

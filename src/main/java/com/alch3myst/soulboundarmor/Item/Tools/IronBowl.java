@@ -1,9 +1,7 @@
-package com.alch3myst.soulboundarmor.Tools;
+package com.alch3myst.soulboundarmor.Item.Tools;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-
-import java.util.Random;
 
 public class IronBowl extends Item {
     public IronBowl(Properties properties) {

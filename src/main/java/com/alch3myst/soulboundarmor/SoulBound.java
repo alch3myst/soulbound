@@ -5,7 +5,8 @@ import com.alch3myst.soulboundarmor.Proxy.IProxy;
 import com.alch3myst.soulboundarmor.Registry.EffectRegistry;
 import com.alch3myst.soulboundarmor.Registry.ItemRegistry;
 import com.alch3myst.soulboundarmor.Server.proxy.ServerProxy;
-import com.alch3myst.soulboundarmor.events.PlayerTickEvent;
+import com.alch3myst.soulboundarmor.events.MobDropEvent;
+import com.alch3myst.soulboundarmor.events.PlayerEvent;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -43,14 +44,11 @@ public class SoulBound
 
         // Register Effects
         EffectRegistry.init();
-
-        // Register ourselves for server and other game events we are interested in
-//        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        LOGGER.warn("PLZ WORK U SON OF A !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        MinecraftForge.EVENT_BUS.register(new PlayerTickEvent());
+        MinecraftForge.EVENT_BUS.register(new PlayerEvent());
+        MinecraftForge.EVENT_BUS.register(new MobDropEvent());
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) { }

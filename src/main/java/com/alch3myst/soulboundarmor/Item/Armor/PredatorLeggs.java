@@ -1,4 +1,4 @@
-package com.alch3myst.soulboundarmor.Armor;
+package com.alch3myst.soulboundarmor.Item.Armor;
 
 import com.alch3myst.soulboundarmor.Client.proxy.ClientProxy;
 import com.alch3myst.soulboundarmor.SoulBound;
@@ -19,24 +19,23 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class PredatorArmor extends ArmorItem {
+public class PredatorLeggs extends ArmorItem {
 
-    public PredatorArmor(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
+    public PredatorLeggs(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
         super(materialIn, slot, builderIn );
     }
 
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 
-        if (!player.isPotionActive(Effects.STRENGTH)) {
-            player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 1000, 2));
+        if (!player.isPotionActive(Effects.SPEED)) {
+            player.addPotionEffect(new EffectInstance(Effects.SPEED, 1000, 3));
         }
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(ITextComponent.getTextComponentOrEmpty("Death to your enemies"));
-        tooltip.add(ITextComponent.getTextComponentOrEmpty("Strength"));
+        tooltip.add(ITextComponent.getTextComponentOrEmpty("Speed"));
     }
 
     // Custom model render

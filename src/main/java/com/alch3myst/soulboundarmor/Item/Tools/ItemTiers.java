@@ -1,4 +1,4 @@
-package com.alch3myst.soulboundarmor.Tools;
+package com.alch3myst.soulboundarmor.Item.Tools;
 
 import com.alch3myst.soulboundarmor.Registry.ItemRegistry;
 import net.minecraft.item.IItemTier;
