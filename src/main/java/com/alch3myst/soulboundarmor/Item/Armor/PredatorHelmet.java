@@ -28,9 +28,13 @@ public class PredatorHelmet extends ArmorItem {
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 
-        if (!player.isPotionActive(Effects.NIGHT_VISION)) {
+        if (!player.isPotionActive(Effects.WATER_BREATHING)) {
             player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 1000, 0));
-            player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 1000, 0));
+            player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 500, 0));
+
+            // Feed the player
+            player.getFoodStats().setFoodLevel( player.getFoodStats().getFoodLevel() + 3 );
+
         }
     }
 

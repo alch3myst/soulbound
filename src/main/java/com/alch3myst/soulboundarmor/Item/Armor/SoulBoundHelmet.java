@@ -29,8 +29,12 @@ public class SoulBoundHelmet extends ArmorItem {
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
         if (!player.isPotionActive(Effects.REGENERATION)) {
             if (!world.isRemote) {
-                player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 1000, 2));
+                player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 1000, 1));
                 player.addPotionEffect(new EffectInstance(Effects.LUCK, 1000, 1));
+
+                // Feed the player
+                player.getFoodStats().setFoodLevel( player.getFoodStats().getFoodLevel() + 2 );
+
             }
         }
     }

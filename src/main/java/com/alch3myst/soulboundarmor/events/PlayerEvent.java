@@ -2,6 +2,8 @@ package com.alch3myst.soulboundarmor.events;
 
 import com.alch3myst.soulboundarmor.Registry.EffectRegistry;
 import com.alch3myst.soulboundarmor.Registry.ItemRegistry;
+import com.alch3myst.soulboundarmor.SoulBound;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -69,11 +71,13 @@ public class PlayerEvent {
                         player.abilities.allowFlying = player.isCreative();
                     }
                 }
+
             }
         }
     }
 
     /***** Step Assist Update *****/
+    private boolean stepAssist = true;
     @SubscribeEvent
     public void slotChang(TickEvent.PlayerTickEvent event) {
 
@@ -85,23 +89,23 @@ public class PlayerEvent {
                 event.player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.SOUL_BOUND_BOOTS.get() ||
                 event.player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.PREDATOR_BOOTS.get()
             ) {
-
-                // if step is default
-                if (event.player.stepHeight == 0.5F) {
-
+                if (stepAssist) {
                     // Set step to one block
                     event.player.stepHeight = 1.0F;
+
+                    stepAssist = false;
                 }
 
-            } else if (event.player.stepHeight != 0.5F) { // If boots are not quipped check if step are not default
+            } else { // If boots are not quipped check if step are not default
 
                 // Set step to default
-                event.player.stepHeight = 0.5F;
+                event.player.stepHeight = 0.6F;
 
+                stepAssist = true;
             }
-
         }
     }
+    /******End Step Assist Update*********/
 
     @SubscribeEvent
     public void fallDamage(LivingFallEvent event) {
