@@ -20,17 +20,25 @@
   "item.soulbound.poison_soul": "Poison Soul",
   "item.soulbound.iron_bowl": "Iron Bowl",
   "item.soulbound.pastle": "Pastle",
+  "item.soulbound.reinforced_string": "Reinforced String",
 
   "item.soulbound.soul_bound_sword": "Soul Bound Sword",
-  "item.soulbound.soulbound_chestplate": "Soul Bound Chestplate",
+  "item.soulbound.soulbound_chestplate": "Soul Bound Body Armor",
   "item.soulbound.soulbound_helmet": "Soul Bound Helmet",
   "item.soulbound.soulbound_legs": "Soul Bound Legs",
   "item.soulbound.soulbound_boots": "Soul Bound Boots",
 
-  "item.soulbound.predator_chestplate": "Predator Chestplate",
+  "item.soulbound.predator_chestplate": "Predator Body Armor",
   "item.soulbound.predator_helmet": "Predator Helmet",
   "item.soulbound.predator_legs": "Predator Legs",
   "item.soulbound.predator_boots": "Predator Boots",
+  "item.soulbound.predator_katana": "Predator Katana",
+  "item.soulbound.predator_bow": "Predator Bow",
+
+  "item.soulbound.demon_chestplate": "Demon Body Armor",
+  "item.soulbound.demon_helmet": "Demon Helmet",
+  "item.soulbound.demon_legs": "Demon Legs",
+  "item.soulbound.demon_boots": "Demon Boots",
 
   "effect.soulbound.predators_mark": "Predator's Mark",
   "itemGroup.soulBoundTab": "Soul Bound"

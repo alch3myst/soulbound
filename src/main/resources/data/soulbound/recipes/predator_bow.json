@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    " px",
+    "psx",
+    " px"
+  ],
+  "key":
+  {
+    "p":
+    {
+      "item": "soulbound:predator_ingot"
+    },
+    "x": {
+      "item": "soulbound:reinforced_string"
+    },
+    "s": {
+      "item": "soulbound:poison_soul"
+    }
+  },
+  "result":
+  {
+    "item": "soulbound:predator_bow",
+    "count": 1
+  }
+}

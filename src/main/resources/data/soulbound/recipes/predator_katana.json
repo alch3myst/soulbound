@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "  p",
+    " p ",
+    "pxx"
+  ],
+  "key":
+  {
+    "p":
+    {
+      "item": "soulbound:predator_ingot"
+    },
+    "x": {
+      "item": "soulbound:reinforced_string"
+    }
+  },
+  "result":
+  {
+    "item": "soulbound:predator_katana",
+    "count": 1
+  }
+}

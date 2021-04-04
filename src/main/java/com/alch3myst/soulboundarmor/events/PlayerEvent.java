@@ -7,16 +7,24 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import org.apache.http.util.EntityUtils;
+import org.apache.logging.log4j.Level;
 
 import java.util.List;
 
@@ -54,7 +62,7 @@ public class PlayerEvent {
                         // For each player add a regeneration effect for 10 seconds
                         for (PlayerEntity aPlayer : playersAround) {
                             if ( !aPlayer.isPotionActive(Effects.REGENERATION) ) {
-                                aPlayer.addPotionEffect(new EffectInstance(Effects.REGENERATION, 100, 0));
+                                aPlayer.addPotionEffect(new EffectInstance(Effects.REGENERATION, 100, 1));
                             }
                         }
                     }
@@ -87,7 +95,8 @@ public class PlayerEvent {
             // Check if player has any boot equipped
             if (
                 event.player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.SOUL_BOUND_BOOTS.get() ||
-                event.player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.PREDATOR_BOOTS.get()
+                event.player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.PREDATOR_BOOTS.get() ||
+                event.player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.DEMON_BOOTS.get()
             ) {
                 if (stepAssist) {
                     // Set step to one block
@@ -107,6 +116,8 @@ public class PlayerEvent {
     }
     /******End Step Assist Update*********/
 
+
+    // Cancel fall damage
     @SubscribeEvent
     public void fallDamage(LivingFallEvent event) {
         // Get current played world
@@ -120,12 +131,42 @@ public class PlayerEvent {
                 // Cancel fall damage event
                 event.setCanceled(
                         player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.PREDATOR_BOOTS.get() ||
-                        player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.SOUL_BOUND_BOOTS.get()
+                        player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.SOUL_BOUND_BOOTS.get() ||
+                        player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ItemRegistry.DEMON_BOOTS.get()
                 );
             }
         }
     }
 
+    // Heal player while blocking when demon chest are equipped
+    @SubscribeEvent
+    public void LivingAttackEvent(LivingAttackEvent event) {
+
+        // Check if the entity is a player (This fix the cast crash)
+        if (event.getEntityLiving() != null && event.getEntity() instanceof PlayerEntity) {
+
+            // Get player world
+            World w = ((PlayerEntity) event.getEntityLiving()).world;
+
+            if(!w.isRemote) {
+                // Cast to player
+                PlayerEntity player = ((PlayerEntity) event.getEntityLiving());
+
+                if (player.isAlive()) {
+                    // Heal the player on block a attack
+                    if (
+                            player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ItemRegistry.DEMON_CHESTPLATE.get() &&
+                            player.isActiveItemStackBlocking()
+                    ) {
+                        player.heal(2.0F);
+                    }
+                }
+
+            }
+        }
+    }
+
+    // Apply predator mark on hit
     @SubscribeEvent
     public void onDamageAnything(AttackEntityEvent event)
     {
@@ -148,18 +189,19 @@ public class PlayerEvent {
                     // Get current target
                     LivingEntity target = (LivingEntity) event.getTarget();
 
-                    // Add the pred's mark effect
-                    target.addPotionEffect(new EffectInstance(EffectRegistry.PRED_MARK.get(), 100, 1));
+                    // Add the pred mark effect
+                    target.addPotionEffect(new EffectInstance(EffectRegistry.PRED_MARK.get(), 250, 1));
 
                     // Apply blindness
-                    target.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 100, 0));
+                    target.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 250, 0));
                 }
 
                 // If the predator has less then 2 hp apply a regen effect for 3 seconds (only one proc)
-                if ( player.getHealth() <= 2.0F && !player.isPotionActive(Effects.REGENERATION) ) {
-                    player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 30, 0));
+                if ( player.getHealth() <= 5.0F && !player.isPotionActive(Effects.REGENERATION) ) {
+                    player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 100, 0));
                 }
             }
         }
     }
+
 }

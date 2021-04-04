@@ -25,6 +25,7 @@ public class ClientProxy implements IProxy {
         return (A) (armorSlot == EquipmentSlotType.LEGS ? soulLegs : soulArmor);
     }
 
+
     // Predator Custom Armor model sizes
     private final PredatorSetModel predArmor = new PredatorSetModel(0.3F);
     private final PredatorSetModel predLegs = new PredatorSetModel(0.1F);
@@ -33,5 +34,16 @@ public class ClientProxy implements IProxy {
     @SuppressWarnings("unchecked")
     public <A extends BipedModel<?>> A getPredatorSetM(EquipmentSlotType armorSlot) {
         return (A) (armorSlot == EquipmentSlotType.LEGS ? predLegs : predArmor);
+    }
+
+
+    // Demon Custom Armor model sizes
+    private final DemonSetModel demonArmor = new DemonSetModel(0.32F);
+    private final DemonSetModel demonLegs = new DemonSetModel(0.12F);
+
+    // Return re-sized armor
+    @SuppressWarnings("unchecked")
+    public <A extends BipedModel<?>> A getDemonSetM(EquipmentSlotType armorSlot) {
+        return (A) (armorSlot == EquipmentSlotType.LEGS ? demonLegs : demonArmor);
     }
 }

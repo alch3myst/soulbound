@@ -30,7 +30,7 @@ public class SoulBoundArmor extends ArmorItem {
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
         if (!player.isPotionActive(Effects.JUMP_BOOST)) {
-            player.addPotionEffect(new EffectInstance(Effects.HASTE, 1000, 1));
+            player.addPotionEffect(new EffectInstance(Effects.HASTE, 1000, 1,false, false));
         }
     }
 

@@ -1,6 +1,7 @@
 package com.alch3myst.soulboundarmor;
 
 import com.alch3myst.soulboundarmor.Client.proxy.ClientProxy;
+import com.alch3myst.soulboundarmor.Item.Weapons.PredatorBow;
 import com.alch3myst.soulboundarmor.Proxy.IProxy;
 import com.alch3myst.soulboundarmor.Registry.EffectRegistry;
 import com.alch3myst.soulboundarmor.Registry.ItemRegistry;
@@ -8,7 +9,9 @@ import com.alch3myst.soulboundarmor.Server.proxy.ServerProxy;
 import com.alch3myst.soulboundarmor.events.MobDropEvent;
 import com.alch3myst.soulboundarmor.events.PlayerEvent;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;

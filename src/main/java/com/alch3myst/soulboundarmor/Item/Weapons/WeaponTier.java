@@ -1,4 +1,4 @@
-package com.alch3myst.soulboundarmor.Item.Tools;
+package com.alch3myst.soulboundarmor.Item.Weapons;
 
 import com.alch3myst.soulboundarmor.Registry.ItemRegistry;
 import net.minecraft.item.IItemTier;
@@ -6,28 +6,26 @@ import net.minecraft.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
-public enum ItemTiers implements IItemTier {
+public enum WeaponTier implements IItemTier {
 
-    SOUL(3, 0,  10.0F, 10.0F, 27, () -> {
-        return Ingredient.fromItems(ItemRegistry.SOUL_BOUND_SWORD.get());
-    });
+    PREDATOR(3000, 7, 13, 4, 4,
+            () -> { return Ingredient.fromItems(ItemRegistry.PREDATOR_INGOT.get()); } );
 
-    private final Supplier<Ingredient> repairMaterial;
-    private final int harvestlevel;
     private final int maxUses;
     private final float efficiency;
     private final float attackDamage;
+    private final int harvestLevel;
     private final int enchantability;
+    private final Supplier<Ingredient> repairMaterial;
 
-    ItemTiers(int harvestlevel, int maxUses, float efficiency, float attackDamage, int enchantability, Supplier<Ingredient> repairMaterial){
-        this.harvestlevel = harvestlevel;
+    WeaponTier(int maxUses, float efficiency, float attackDamage, int harvestLevel, int enchantability, Supplier<Ingredient> repairMaterial){
         this.maxUses = maxUses;
         this.efficiency = efficiency;
         this.attackDamage = attackDamage;
+        this.harvestLevel = harvestLevel;
         this.enchantability = enchantability;
         this.repairMaterial = repairMaterial;
     }
-
 
     @Override
     public int getMaxUses() {
@@ -46,7 +44,7 @@ public enum ItemTiers implements IItemTier {
 
     @Override
     public int getHarvestLevel() {
-        return harvestlevel;
+        return harvestLevel;
     }
 
     @Override

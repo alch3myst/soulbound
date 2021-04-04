@@ -19,41 +19,41 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SoulBoundHelmet extends ArmorItem {
+public class DemonArmor extends ArmorItem {
 
-    public SoulBoundHelmet(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
+    public DemonArmor(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
         super(materialIn, slot, builderIn );
     }
 
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        if (!player.isPotionActive(Effects.REGENERATION)) {
-            if (!world.isRemote) {
-                player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 1000, 1,false, false));
-                player.addPotionEffect(new EffectInstance(Effects.LUCK, 1000, 1,false, false));
 
-                // Feed the player
-                player.getFoodStats().setFoodLevel( player.getFoodStats().getFoodLevel() + 2 );
+        if (!player.isPotionActive(Effects.ABSORPTION)) {
 
+            if (!player.isPotionActive(Effects.HEALTH_BOOST)) {
+                player.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 3000, 1, false, false));
             }
+
+            player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, 1000, 0, false, false));
+            player.addPotionEffect(new EffectInstance(Effects.INSTANT_HEALTH, 100, 0,false, false));
         }
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(ITextComponent.getTextComponentOrEmpty("Regeneration"));
+        tooltip.add(ITextComponent.getTextComponentOrEmpty("No fear"));
     }
 
-    // Custom armor
+    // Custom model render
     @Nullable
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
-        return SoulBound.PROXY instanceof ClientProxy ? ((ClientProxy) SoulBound.PROXY).getSoulBoundSet(armorSlot) : null;
+        return SoulBound.PROXY instanceof ClientProxy ? ((ClientProxy) SoulBound.PROXY).getDemonSetM(armorSlot) : null;
     }
 
     @Nullable
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
-        return "soulbound:textures/models/armor/soul_layer_1.png";
+        return "soulbound:textures/models/armor/demon_layer_1.png";
     }
 }

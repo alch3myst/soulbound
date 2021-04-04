@@ -13,13 +13,13 @@ public class PredatorsMark extends Effect {
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
         if (entityLivingBaseIn.isAlive()) {
-            entityLivingBaseIn.attackEntityFrom(DamageSource.MAGIC, 1 + amplifier);
+            entityLivingBaseIn.attackEntityFrom(DamageSource.MAGIC, 2 + amplifier);
         }
     }
 
-    // Re turn every 10 ticks (1 sec)
+    // Return every 10 ticks (1 sec)
     @Override
     public boolean isReady(int duration, int amplifier) {
-        return duration % 25 == 0;
+        return duration % 20 == 0;
     }
 }

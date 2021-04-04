@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "soulbound:predator_dust"
+    },
+    {
+      "item": "minecraft:string"
+    }
+  ],
+  "result":
+  {
+    "item": "soulbound:reinforced_string",
+    "count": 1
+  }
+}

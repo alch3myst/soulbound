@@ -29,7 +29,7 @@ public class PredatorArmor extends ArmorItem {
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 
         if (!player.isPotionActive(Effects.STRENGTH)) {
-            player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 1000, 2));
+            player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 1000, 2, false, false));
         }
     }
 

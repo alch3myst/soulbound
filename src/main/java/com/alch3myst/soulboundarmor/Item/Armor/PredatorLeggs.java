@@ -29,7 +29,7 @@ public class PredatorLeggs extends ArmorItem {
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 
         if (!player.isPotionActive(Effects.SPEED)) {
-            player.addPotionEffect(new EffectInstance(Effects.SPEED, 1000, 3));
+            player.addPotionEffect(new EffectInstance(Effects.SPEED, 1000, 3,false, false));
         }
     }
 

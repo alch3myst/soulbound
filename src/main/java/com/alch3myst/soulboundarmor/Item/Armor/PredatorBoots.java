@@ -29,7 +29,7 @@ public class PredatorBoots extends ArmorItem {
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 
         if (!player.isPotionActive(Effects.JUMP_BOOST)) {
-            player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 1000, 2));
+            player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 1000, 2,false, false));
         }
     }
 

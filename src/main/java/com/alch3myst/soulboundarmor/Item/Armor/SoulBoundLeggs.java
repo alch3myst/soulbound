@@ -30,7 +30,7 @@ public class SoulBoundLeggs extends ArmorItem {
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
         // Check if some speed effect are going
         if (!player.isPotionActive(Effects.SPEED)) {
-            player.addPotionEffect(new EffectInstance(Effects.SPEED, 1000, 1));
+            player.addPotionEffect(new EffectInstance(Effects.SPEED, 1000, 1,false, false));
         }
     }
 
